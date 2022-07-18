@@ -124,7 +124,7 @@ void setup() {
   if (role) {
     radio.stopListening();  // put radio in TX mode
   } else {
-    radio.startListening();  // put radio in RX mode
+    radio.startListening();  // put radio in RX mode brgw
   }
 
   // For debugging info

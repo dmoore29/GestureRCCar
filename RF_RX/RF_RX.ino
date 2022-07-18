@@ -15,6 +15,13 @@
 #include "printf.h"
 #include "RF24.h"
 
+#define FORWARD_PIN 4
+#define BACKWARD_PIN 2
+#define LEFT_PIN 3
+#define RIGHT_PIN 7
+
+#define THRESHOLD 100
+
 // instantiate an object for the nRF24L01 transceiver
 RF24 radio(5, 6);  // using pin 9 for the CE pin, and pin 10 for the CSN pin
 
@@ -118,12 +125,38 @@ void loop() {
       Serial.print(F("Z: "));
       Serial.println(zData);
 
-      if(xData > 100){
-        digitalWrite(4, HIGH);
+      // FORWARD
+      if(xData > THRESHOLD){
+        digitalWrite(FORWARD_PIN, HIGH);
       }
       else{
-        digitalWrite(4, LOW);
+        digitalWrite(FORWARD_PIN, LOW);
       }
+
+      // BACKWARD
+      if(xData < -THRESHOLD){
+        digitalWrite(BACKWARD_PIN, HIGH);
+      }
+      else{
+        digitalWrite(BACKWARD_PIN, LOW);
+      }
+
+      // LEFT
+      if(zData < -THRESHOLD){
+        digitalWrite(LEFT_PIN, HIGH);
+      }
+      else{
+        digitalWrite(LEFT_PIN, LOW);
+      }
+      
+      // RIGHT
+      if(zData > THRESHOLD){
+        digitalWrite(RIGHT_PIN, HIGH);
+      }
+      else{
+        digitalWrite(RIGHT_PIN, LOW);
+      }
+      
       delay(50);
     }
 
