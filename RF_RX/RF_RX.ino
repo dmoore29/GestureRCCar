@@ -127,33 +127,41 @@ void loop() {
 
       // FORWARD
       if(xData > THRESHOLD){
+        digitalWrite(BACKWARD_PIN, LOW);
         digitalWrite(FORWARD_PIN, HIGH);
       }
       else{
+        digitalWrite(BACKWARD_PIN, LOW);
         digitalWrite(FORWARD_PIN, LOW);
       }
 
       // BACKWARD
       if(xData < -THRESHOLD){
+        digitalWrite(FORWARD_PIN, LOW);
         digitalWrite(BACKWARD_PIN, HIGH);
       }
       else{
+        digitalWrite(FORWARD_PIN, LOW);
         digitalWrite(BACKWARD_PIN, LOW);
       }
 
       // LEFT
       if(zData < -THRESHOLD){
+        digitalWrite(RIGHT_PIN, LOW);
         digitalWrite(LEFT_PIN, HIGH);
       }
       else{
+        digitalWrite(RIGHT_PIN, LOW);
         digitalWrite(LEFT_PIN, LOW);
       }
       
       // RIGHT
       if(zData > THRESHOLD){
+        digitalWrite(LEFT_PIN, LOW);
         digitalWrite(RIGHT_PIN, HIGH);
       }
       else{
+        digitalWrite(LEFT_PIN, LOW);
         digitalWrite(RIGHT_PIN, LOW);
       }
       
